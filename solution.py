@@ -127,12 +127,20 @@ def get_route(hostname):
                     #Fill in start
                     hopDomain = 'Hostname not returnable'
                     #Fill in end
+                if isinstance(hopDomain, tuple):
+                    hopDomain = hopDomain[0]
+                #hopDomain = hopDomain[0]
 
                 if types == 11:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
+                    delay = timeReceived - t
+                    delay = round(delay * 1000)
+                    delayStr = str(delay) + 'ms'
+                    tracelist2.append([str(ttl), delayStr, addr[0], hopDomain])
+                    print('{}\t{}\t{}\t{}'.format(str(ttl), delayStr, addr[0], hopDomain))
                     #Fill in end
                 elif types == 3:
                     bytes = struct.calcsize("d")
@@ -155,6 +163,7 @@ def get_route(hostname):
                     delayStr = str(delay) + 'ms'
                     tracelist2.append([str(ttl), delayStr, addr[0], hopDomain])
                     print('{}\t{}\t{}\t{}'.format(str(ttl), delayStr, addr[0], hopDomain))
+
                     return tracelist2
                     #Fill in end
                 else:
