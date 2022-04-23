@@ -125,7 +125,7 @@ def get_route(hostname):
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    hopDomain = 'Hostname not returnable'
+                    hopDomain = 'hostname not returnable'
                     #Fill in end
                 if isinstance(hopDomain, tuple):
                     hopDomain = hopDomain[0]
